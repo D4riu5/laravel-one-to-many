@@ -8,13 +8,37 @@
                     My projects
                 </h1>
 
-                <a href="{{ route('admin.projects.create') }}" class="btn btn-success my-2">
+                <a href="{{ route('admin.projects.create') }}" class="btn btn-success mt-2">
                     Add a project
                 </a>
             </div>
         </div>
 
         @include('partials.success')
+
+        <div class="row mb-4">
+            <div class="col">
+                <h4>
+                    Search
+                </h4>
+
+                <form action="{{ route('admin.projects.index') }}" method="GET">
+                    <div>
+                        <input
+                            type="text"
+                            name="title"
+                            placeholder="Search by Project title..."
+                            class="form-control"
+                            value="{{ request()->input('title') }}">
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-secondary my-2">
+                            Search
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
         <div class="row">
             <div class="col">

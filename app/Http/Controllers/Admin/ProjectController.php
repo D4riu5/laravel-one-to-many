@@ -28,7 +28,18 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::all();
+        // search bar request
+        
+        $titleFromSearch = request()->input('title');
+        if (isset($titleFromSearch)) {
+            $projects = Project::where('title', 'LIKE', '%'.$titleFromSearch.'%')->get();
+        } 
+        else {
+            $projects = Project::all();
+        }
+        
+
+
 
         // $projects = Project::paginate(5);
 

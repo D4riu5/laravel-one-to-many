@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 // Models
 use App\Models\Type;
+use App\Models\Project;
 
 // Requests
 use App\Http\Requests\StoreTypeRequest;
@@ -104,11 +105,13 @@ class TypeController extends Controller
      */
     public function destroy(Type $type)
     {
+        // remove foreign key from projects and update it to null
+        // DB::table('projects')
+        //     ->where('type_id', $type->id)
+        //     ->update(['type_id' => null]);
 
-        $rowsWithForeingKey = DB::table('projects')
-            ->where('type_id', $type->id)
-            ->update(['type_id' => null]);
-
+        // Alternative
+        Project::where('type_id', $type->id)->update(['type_id' => null]);
 
         $type->delete();
 

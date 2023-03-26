@@ -16,10 +16,14 @@
 
                     {{ __('Before proceeding, please check your email for a verification link.') }}
                     {{ __('If you did not receive the email') }},
-                    <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
+                    {{-- <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
                         @csrf
                         <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>.
-                    </form>
+                    </form> --}}
+                    <br>
+                    <span class="text-danger">
+                        If email "expired" go to edit profile and re-send the email.
+                    </span>
                 </div>
             </div>
         </div>

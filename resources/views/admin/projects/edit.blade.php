@@ -38,6 +38,18 @@
                     </div>
 
                     <div class="mb-3">
+                        <label for="type_id" class="form-label">
+                            Type
+                        </label>
+                        <select name="type_id" id="type_id" class="form-select">
+                            <option value="">No Type</option>
+                            @foreach ($types as $type)
+                                <option value="{{ $type->id }}" {{ old('type_id', $project->type_id) == $type->id ? 'selected' : '' }}>{{ $type->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
                         <label for="img" class="form-label">
                             Old image preview
                         </label>

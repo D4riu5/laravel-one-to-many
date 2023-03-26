@@ -28,6 +28,7 @@ class ProjectSeeder extends Seeder
                 'title' => $title,
                 'slug' => Str::slug($title),
                 'description' =>$faker->paragraph(),
+                // 'type_id' => '?',
             ]);
         }
     }

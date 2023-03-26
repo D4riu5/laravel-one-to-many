@@ -13,6 +13,9 @@
     <div class="content">
         <div class="container">
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempora temporibus, dicta nemo aliquam totam nisi deserunt soluta quas voluptatum ab beatae praesentium necessitatibus minus, facilis illum rerum officiis accusamus dolores!</p>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore cupiditate at distinctio tenetur aut maiores, similique officia tempora eum placeat beatae sunt repellendus minus suscipit, perferendis illum, minima sed impedit!
+            </p>
         </div>
     </div>
 @endsection

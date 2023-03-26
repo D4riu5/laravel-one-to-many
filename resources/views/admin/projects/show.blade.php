@@ -13,9 +13,16 @@
                     Slug: {{ $project->slug }}
                 </h6>
 
+                @if ($project->type)
+                    <h3>
+                        Type: {{ $project->type->name }}
+                    </h3>
+                @endif
+
+
                 @if ($project->img)
                     <div>
-                        <img src="{{ asset('storage/'.$project->img) }}" style="height: 400px;" alt="project">
+                        <img src="{{ asset('storage/' . $project->img) }}" style="height: 400px;" alt="project">
                     </div>
                 @endif
 

@@ -14,8 +14,15 @@
                 </h6>
 
                 @if ($project->type)
-                    <h3>
-                        Type: {{ $project->type->name }}
+                    <h3 class="my-3">
+                        Type:
+                        <a href="{{ route('admin.types.show', $project->type->id) }}">
+                            {{ $project->type->name }}
+                        </a>
+                    </h3>
+                @else
+                    <h3 class="my-3">
+                        No type
                     </h3>
                 @endif
 

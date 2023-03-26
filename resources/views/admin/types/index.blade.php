@@ -5,11 +5,11 @@
         <div class="row justify-content-center mb-4">
             <div class="col">
                 <h1>
-                    My projects
+                    Project Types
                 </h1>
 
-                <a href="{{ route('admin.projects.create') }}" class="btn btn-success my-2">
-                    Add a project
+                <a href="{{ route('admin.types.create') }}" class="btn btn-success my-2">
+                    Add a Type
                 </a>
             </div>
         </div>
@@ -22,37 +22,28 @@
                     <thead>
                         <tr>
                             <th scope="col">ID</th>
-                            <th scope="col">Title</th>
+                            <th scope="col">Name</th>
                             <th scope="col">Slug</th>
-                            <th scope="col">Type</th>
+                            <th scope="col"># Projects</th>
                             <th scope="col">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($projects as $project)
+                        @foreach ($types as $type)
                             <tr>
-                                <th scope="row">{{ $project->id }}</th>
-                                <td>{{ $project->title }}</td>
-                                <td>{{ $project->slug }}</td>
-                                <td>
-                                    @if ($project->type)
-                                        <a href="{{ route('admin.types.show', $project->type->id) }}">
-                                            {{ $project->type->name }}
-                                        </a>
-                                    @else
-                                        No type
-                                    @endif
-                                </td>
-                                <td>
-                                    <a href="{{ route('admin.projects.show', $project->id) }}" class="btn btn-primary">
+                                <th scope="row">{{ $type->id }}</th>
+                                <td>{{ $type->name }}</td>
+                                <td>{{ $type->slug }}</td>
+                                <td>{{ $type->projects()->count() }}</td>
+                                <td style="width:20%">
+                                    <a href="{{  route('admin.types.show', $type->id) }}" class="btn btn-primary">
                                         <i class="fa-solid fa-circle-info"></i>
                                     </a>
-                                    <a href="{{ route('admin.projects.edit', $project->id) }}" class="btn btn-warning">
+                                    <a href="{{ route('admin.types.edit', $type->id) }}" class="btn btn-warning">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </a>
-                                    <form class="d-inline-block"
-                                        action="{{ route('admin.projects.destroy', $project->id) }}" method="POST"
-                                        onsubmit="return confirm('Are you sure you want to delete this project');">
+                                    <form class="d-inline-block" action="{{ route('admin.types.destroy', $type->id) }}" method="POST"
+                                        onsubmit="return confirm('Are you sure you want to delete this type');">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-danger">
@@ -67,7 +58,7 @@
 
                 {{-- PAGINATION (FIX STYLE) --}}
                 {{-- <div class="pagination-container my-3">
-                    {{ $projects->links() }}
+                    {{ $types->links() }}
                 </div> --}}
             </div>
         </div>

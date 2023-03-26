@@ -3,9 +3,16 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
+// Models
 use App\Models\Type;
+
+// Requests
 use App\Http\Requests\StoreTypeRequest;
 use App\Http\Requests\UpdateTypeRequest;
+
+// Helpers
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class TypeController extends Controller
 {
@@ -16,7 +23,11 @@ class TypeController extends Controller
      */
     public function index()
     {
-        //
+        $types = Type::all();
+        
+        return view('admin.types.index', [
+            "types" => $types
+        ]);
     }
 
     /**
@@ -26,7 +37,7 @@ class TypeController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.types.create');
     }
 
     /**
@@ -37,7 +48,13 @@ class TypeController extends Controller
      */
     public function store(StoreTypeRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        $data['slug'] = Str::slug($data['name']);
+
+        $newType = Type::create($data);
+
+        return redirect()->route('admin.types.show', $newType->id)->with('success', 'Type created successfully');
     }
 
     /**
@@ -48,7 +65,7 @@ class TypeController extends Controller
      */
     public function show(Type $type)
     {
-        //
+        return view('admin.types.show', compact('type'));
     }
 
     /**
@@ -59,7 +76,7 @@ class TypeController extends Controller
      */
     public function edit(Type $type)
     {
-        //
+        return view('admin.types.edit', compact('type'));
     }
 
     /**
@@ -71,7 +88,12 @@ class TypeController extends Controller
      */
     public function update(UpdateTypeRequest $request, Type $type)
     {
-        //
+       $data = $request->validated();
+
+       $data['slug'] = Str::slug($data['name']);
+       $type->update($data);
+
+       return redirect()->route('admin.types.show', $type->id)->with('success', 'Type updated successfully!');
     }
 
     /**
@@ -82,6 +104,14 @@ class TypeController extends Controller
      */
     public function destroy(Type $type)
     {
-        //
+
+        $rowsWithForeingKey = DB::table('projects')
+            ->where('type_id', $type->id)
+            ->update(['type_id' => null]);
+
+
+        $type->delete();
+
+        return redirect()->route('admin.types.index', $type->id)->with('success', 'Type deleted successfully!');
     }
 }
